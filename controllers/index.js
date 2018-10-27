@@ -3,7 +3,7 @@
 function index(request, response) {
     const contextData = {
         title: 'Eventbrite clone project starter',
-        salutation: 'Hello Yale SOM hackers',
+        salutation: 'Hello Yalies!',
 
     };
     response.render('index', contextData);
