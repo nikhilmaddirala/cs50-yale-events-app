@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<p>
+    {{salutation}}
+</p>
+<p>
+    Use this form to create a new event.
+</p>
+
+<form>
+    Event name<br>
+    <input type="text" name="eventname"><br>
+    Location<br>
+    <input type="text" name="location"><br>
+    Image<br>
+    <input type="text" name="image"><br>
+    Date and time<br>
+    <input type="datetime-local" name="datetime"><br>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+
+{% block late_loading_js %}
+{% endblock %}

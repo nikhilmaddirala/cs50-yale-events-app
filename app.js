@@ -31,5 +31,6 @@ app.use('/static', express.static('static'));
 
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
+app.get('/create.html', (req, res) => res.render('create.html'));
 
 module.exports = app;
