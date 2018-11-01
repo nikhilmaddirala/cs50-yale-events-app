@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+This is the body of the attendees template.
+
+{%if peopleMatchignQuery %}
+<ul>
+    {% for person in peopleMatchignQuery %}
+    <li>{{person}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="get">
+    <label for="q">Search</label>
+    <input type="text" name="q" value="">
+    <input type="submit" value="submit" />
+</form>
+{% endblock %}
