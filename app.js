@@ -13,6 +13,8 @@ const app = express();
 // locally instead of a dependency that was installed as
 // specified in our `package.json` file, like "express".
 const indexControllers = require('./controllers/index.js');
+const createControllers = require('./controllers/create.js');
+const eventsControllers = require('./controllers/events.js');
 
 // Through this configuration, Nunjucks will "tell"
 // our Express app that it is handling the templates,
@@ -31,6 +33,7 @@ app.use('/static', express.static('static'));
 
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
-app.get('/create.html', (req, res) => res.render('create.html'));
+app.get('/create', createControllers.createGet);
+app.get('/events', eventsControllers.events);
 
 module.exports = app;

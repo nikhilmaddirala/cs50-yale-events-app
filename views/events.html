@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<p>
+    {{salutation}}
+</p>
+<p>
+    Use this page to browse existing events.
+</p>
+
+{% for event in eventsList %}
+<li>{{ event.id }}, {{ event.title }}</li>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block late_loading_js %}
+{% endblock %}
