@@ -7,6 +7,7 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 
 const app = express();
+const bodyParser = require('body-parser');
 
 // Import our controllers from their files. Notice how we're
 // giving the `require` built-in function the path a file
@@ -30,10 +31,12 @@ app.set('view engine', 'html');
 // like client-side images, js, and css out of
 // a directory called "static".
 app.use('/static', express.static('static'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
 app.get('/create', createControllers.createGet);
 app.get('/events', eventsControllers.events);
+app.post('/createevent', createControllers.createPost);
 
 module.exports = app;
