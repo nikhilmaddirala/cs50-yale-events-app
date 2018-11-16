@@ -38,6 +38,6 @@ app.get('/', indexControllers.index);
 app.get('/create', createControllers.createGet);
 app.get('/events', eventsControllers.events);
 app.post('/createevent', createControllers.createPost);
-// test comment
+
 
 module.exports = app;
