@@ -1,5 +1,8 @@
 // Create a function which is a "controller", it
 // handles a request, writing the response.
+
+const eventsJS = require('../models/events.js');
+
 function createGet(request, response) {
     const contextData = {
         title: 'Eventbrite clone project starter',
@@ -13,8 +16,16 @@ function createPost(request, response) {
     //     title: 'Eventbrite clone project starter',
     //     salutation: 'Hello Yalies!',
     // };
+    const event = {
+        id: eventsJS.all[eventsJS.all.length - 1].id + 1,
+        title: request.body.eventname,
+        date: Date(request.body.datetime),
+        image: request.body.image,
+        location: request.body.location,
+        attending: [],
+    };
+    eventsJS.addEvent(event);
     response.redirect('/events');
-    console.log(request.body);
 }
 
 

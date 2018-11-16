@@ -54,7 +54,13 @@ function getById(id) {
     return null;
 }
 
+// Add event to allEvents
+function addEvent(event) {
+    allEvents.push(event);
+}
+
 module.exports = {
     all: allEvents,
     getById,
+    addEvent,
 };

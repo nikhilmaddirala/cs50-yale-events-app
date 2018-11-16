@@ -8,10 +8,42 @@
     Use this page to browse existing events.
 </p>
 
-{% for event in eventsList %}
-<li>{{ event.id }}, {{ event.title }}</li>
-{% endfor %}
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
 
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+<table style="width:100%">
+  <tr>
+    <th>Event id</th>
+    <th>Event name</th>
+    <th>Location</th> 
+    <th>Image</th>
+    <th>Date</th>
+  </tr>
+{% for event in eventsList %}
+<tr>
+    <td>{{ event.id }}</td>
+    <td>{{ event.title }}</td>
+    <td>{{ event.location }}</td>
+    <td>{{ event.image }}</td>
+    <td>{{ event.date }}</td>
+</tr>
+{% endfor %}
+</table>
 
 {% endblock %}
 
