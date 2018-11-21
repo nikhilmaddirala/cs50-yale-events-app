@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<p>
+    {{salutation}}
+</p>
+<p>
+    Welcome to the event page for {{ event.title }}.
+</p>
+<p>
+    Event name: {{ event.title }}.
+</p>
+<p>
+    Event location: {{ event.location }}.
+</p>
+<p>
+    Event attendees: {{ event.attending }}.
+</p>
+
+
+{% endblock %}
+
+{% block late_loading_js %}
+{% endblock %}

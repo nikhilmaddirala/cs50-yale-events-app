@@ -25,6 +25,8 @@ function createPost(request, response) {
         attending: [],
     };
     eventsJS.addEvent(event);
+    eventsJS.addEventSQL(request.body.eventname, request.body.datetime,
+        request.body.image, request.body.location);
     response.redirect('/events');
 }
 

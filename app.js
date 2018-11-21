@@ -37,8 +37,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
 app.get('/create', createControllers.createGet);
-app.get('/events', eventsControllers.events);
+app.get('/events', eventsControllers.eventsSQL);
 app.post('/createevent', createControllers.createPost);
 app.get('/about', aboutControllers.about);
+app.get('/events/:id', eventsControllers.singleEvent);
 
 module.exports = app;

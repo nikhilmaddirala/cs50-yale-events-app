@@ -34,10 +34,10 @@ tr:nth-child(even) {
     <th>Image</th>
     <th>Date</th>
   </tr>
-{% for event in eventsList %}
+{% for event in eventsListSQL %}
 <tr>
     <td>{{ event.id }}</td>
-    <td>{{ event.title }}</td>
+    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
     <td>{{ event.location }}</td>
     <td>{{ event.image }}</td>
     <td>{{ event.date }}</td>
@@ -49,3 +49,4 @@ tr:nth-child(even) {
 
 {% block late_loading_js %}
 {% endblock %}
+

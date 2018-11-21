@@ -3,6 +3,28 @@
 /**
  * An Array of all the events
  */
+
+// SQL
+const { Client } = require('pg');
+
+const client = new Client({
+    connectionString: 'postgres://rdgcbthbjciawd:51617eca5cb0e1ff91aa0aa16421b6e845085fc57ef743f2b798b5fffe05f5ca@ec2-54-197-249-140.compute-1.amazonaws.com:5432/d2ans71chelej9',
+    ssl: true,
+});
+
+
+// Add event to allEvents
+function addEventSQL(title, date, image, location) {
+    client.connect();
+    client.query('INSERT INTO events (title, date, image, location) values ($1, $2, $3, $4);', [title, date, image, location], (err) => {
+        if (err) throw err;
+        // console.log(res);
+        // client.end();
+    });
+}
+
+
+// JSON
 const allEvents = [
     {
         id: 0,
@@ -59,8 +81,10 @@ function addEvent(event) {
     allEvents.push(event);
 }
 
+
 module.exports = {
     all: allEvents,
     getById,
     addEvent,
+    addEventSQL,
 };
