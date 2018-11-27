@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * An Array of all the events
- */
 
 // SQL
 const { Client } = require('pg');
@@ -22,7 +19,6 @@ function addEventSQL(title, date, image, location) {
         // client.end();
     });
 }
-
 
 // JSON
 const allEvents = [

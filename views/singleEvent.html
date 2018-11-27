@@ -8,14 +8,39 @@
     Welcome to the event page for {{ event.title }}.
 </p>
 <p>
+    Event id: {{ event.id }}.
+</p>
+<p>
     Event name: {{ event.title }}.
+</p>
+<p>
+    Event image: {{ event.image }}.
 </p>
 <p>
     Event location: {{ event.location }}.
 </p>
 <p>
-    Event attendees: {{ event.attending }}.
+    Event attendees: 
+    {% for attendee in attendees %}
+    {{ attendee.email }}
+    {% endfor %}
 </p>
+<p>
+    Number of donations: {{ event.donations }}.
+</p>
+
+<form action="/events/{{ event.id }}/donate" method="post">
+    Make a donation:<br>
+    <input type="submit" value="Donate">
+</form>
+
+<br>
+
+<form action="/events/{{ event.id }}/rsvp" method="post">
+    Enter your email address to RSVP:<br>
+    <input type="text" placeholder="email address" name="email"><br>
+    <input type="submit" value="RSVP">
+</form>
 
 
 {% endblock %}

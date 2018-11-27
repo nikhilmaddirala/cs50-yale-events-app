@@ -1,7 +1,7 @@
 // Create a function which is a "controller", it
 // handles a request, writing the response.
 
-// SQL
+// Establish SQL database connection
 const { Client } = require('pg');
 
 const client = new Client({
@@ -9,53 +9,77 @@ const client = new Client({
     ssl: true,
 });
 
-const eventsJS = require('../models/events.js');
 
-const eventsList = eventsJS.all;
-
-let eventsListSQL = [];
-
-function updateEventsSQL() {
+// Events controller
+function eventsSQL(request, response) {
     client.connect();
-    client.query('SELECT * FROM events;', (err, res) => {
-        if (err) throw err;
-        // client.end();
-        eventsListSQL = res.rows;
-        console.log('Events list update');
-        console.log(eventsListSQL);
+    client.query('SELECT * FROM events ORDER BY id;', (err, res) => {
+        if (err) {
+            throw err;
+        } else {
+            const contextData = {
+                title: 'Eventbrite clone project starter',
+                salutation: 'Hello Yalies!',
+                eventsListSQL: res.rows,
+            };
+            response.render('events', contextData);
+        }
     });
 }
 
-function eventsSQL(request, response) {
-    updateEventsSQL();
-    const contextData = {
-        title: 'Eventbrite clone project starter',
-        salutation: 'Hello Yalies!',
-        eventsListSQL,
-    };
-    console.log('Events list final');
-    console.log(eventsListSQL);
-    response.render('events', contextData);
-}
 
-
-function events(request, response) {
-    const contextData = {
-        title: 'Eventbrite clone project starter',
-        salutation: 'Hello Yalies!',
-        eventsList,
-    };
-    response.render('events', contextData);
-}
-
+// Single event page controller
 function singleEvent(request, response) {
-    const contextData = {
-        event: eventsListSQL[request.params.id],
-    };
-    response.render('singleEvent', contextData);
+    client.connect();
+    client.query('SELECT * FROM events ORDER BY id;', (err, res) => {
+        if (err) {
+            throw err;
+        } else {
+            client.query('SELECT email FROM attendees WHERE id = $1;', [request.params.id], (err2, res2) => {
+                if (err2) {
+                    throw err;
+                } else {
+                    const contextData = {
+                        title: 'Eventbrite clone project starter',
+                        salutation: 'Hello Yalies!',
+                        event: res.rows[request.params.id - 1],
+                        attendees: res2.rows,
+                    };
+                    console.log('attendees are', contextData.attendees);
+                    response.render('singleEvent', contextData);
+                }
+            });
+        }
+    });
+}
+
+
+// donate controller
+function donate(request, response) {
+    client.connect();
+    client.query('UPDATE events SET donations = donations + 1 WHERE id = $1;', [request.params.id], (err) => {
+        if (err) {
+            throw err;
+        } else {
+            response.redirect(`/events/${request.params.id}`);
+        }
+    });
+}
+
+
+// rsvp controller
+function rsvp(request, response) {
+    client.connect();
+    client.query('INSERT INTO attendees (id, email) values ($1, $2);', [request.params.id, request.body.email], (err) => {
+        if (err) {
+            throw err;
+        } else {
+            response.redirect(`/events/${request.params.id}`);
+        }
+    });
 }
 
 
 module.exports = {
-    events, singleEvent, eventsSQL, updateEventsSQL,
+    singleEvent, eventsSQL, donate, rsvp,
 };
