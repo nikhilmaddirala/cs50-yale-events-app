@@ -9026,5 +9026,20 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+.mt-0 {
+  margin-top: 20 !important;
+}
+.ml-1 {
+  margin-left: 0 !important;
+}
+
+.px-2 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.p-3 {
+  padding: 0 !important;
+}
 }
 /*# sourceMappingURL=bootstrap.css.map */
