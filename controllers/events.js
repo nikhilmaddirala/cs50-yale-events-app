@@ -31,7 +31,7 @@ function eventsSQL(request, response) {
 // Single event page controller
 function singleEvent(request, response) {
     client.connect();
-    client.query('SELECT * FROM events ORDER BY id;', (err, res) => {
+    client.query('SELECT * FROM events WHERE id = $1 ORDER BY id;', [request.params.id], (err, res) => {
         if (err) {
             throw err;
         } else {
@@ -42,10 +42,9 @@ function singleEvent(request, response) {
                     const contextData = {
                         title: 'Eventbrite clone project starter',
                         salutation: 'Hello Yalies!',
-                        event: res.rows[request.params.id - 1],
+                        event: res.rows[0],
                         attendees: res2.rows,
                     };
-                    console.log('attendees are', contextData.attendees);
                     response.render('singleEvent', contextData);
                 }
             });

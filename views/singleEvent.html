@@ -80,6 +80,10 @@ td, th {
     {{ attendee.email }}
     {% endfor %}
 </p>
+
+<p>
+    Event created by: {{ event.lastname }}, {{ event.firstname}} ({{ event.emailaddress}})
+</p>
 <p>
     Number of donations: {{ event.donations }}.
 </p>
