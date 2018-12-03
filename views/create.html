@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>
-    Use this form to create a new event.
-</p>
+
+<div class="container">
+  <h2>Create Event</h2>
+
 <!-- MultiStep Form -->
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <div class="col-md-9">
         <form id="msform" action="/createevent" method="post">
             <!-- progressbar -->
             <ul id="progressbar">
@@ -53,7 +54,6 @@
         <!-- link to designifssy.me code snippets -->
         <!-- /.link to designify.me code snippets -->
     </div>
-</div>
 
 {% endblock %}
 

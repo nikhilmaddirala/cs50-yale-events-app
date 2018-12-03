@@ -1,12 +1,67 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>
-    {{salutation}}
-</p>
-<p>
-    Welcome to the event page for {{ event.title }}.
-</p>
+
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 12px;
+}
+
+
+</style>
+
+<body>
+
+<div class="container">
+  <h2>List of Events</h2>
+   
+  <table class="table table-hover table-bordered">
+    <thead class="thead-light">
+
+  <tr>
+    <th>Event id</th>
+    <th>Event name</th>
+    <th>Location</th> 
+    <th>Image</th>
+    <th>Date</th>
+  </tr>
+   </thead>
+    <tbody>
+{% for event in eventsListSQL %}
+<tr>
+    <td>{{ event.id }}</td>
+    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
+    <td>{{ event.location }}</td>
+    <td>{{ event.image }}</td>
+    <td>{{ event.date }}</td>
+</tr>
+{% endfor %}
+   </tbody>
+</table>
+</div>
+
+</body>
+</html>
+
+
 <p>
     Event id: {{ event.id }}.
 </p>

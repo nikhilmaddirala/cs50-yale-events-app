@@ -46,5 +46,3 @@ app.get('/events/:id', eventsControllers.singleEvent);
 
 
 module.exports = app;
-
-
