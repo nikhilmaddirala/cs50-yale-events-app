@@ -5,7 +5,7 @@
 const { Client } = require('pg');
 
 const client = new Client({
-    connectionString: 'postgres://rdgcbthbjciawd:51617eca5cb0e1ff91aa0aa16421b6e845085fc57ef743f2b798b5fffe05f5ca@ec2-54-197-249-140.compute-1.amazonaws.com:5432/d2ans71chelej9',
+    connectionString: 'postgres://ioarjjnjqyghjm:2d7daf1f1be437042c63d2368dbf2025f6846d6f11c7b7be73b1e0f93b8b9858@ec2-174-129-41-12.compute-1.amazonaws.com:5432/drbedlvb616fi',
     ssl: true,
 });
 
@@ -19,6 +19,35 @@ function createPost(request, response) {
             response.redirect('/events');
         }
     });
+}
+
+// new event controller
+function newEvent(request, response) {
+    const contextData = {
+        errors: [],
+    };
+    if (request.method === 'POST') {
+        console.log('This is a POST request');
+        const errors = [];
+        if (!request.body.title || request.body.title.length > 50) {
+            errors.push('This is a bad title');
+        }
+        // MORE ERROR TESTING
+
+        if (errors.length === 0) {
+            client.connect();
+            client.query('INSERT INTO events (title, year, month, day, hour, minute, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 0);', [request.body.title, request.body.year, request.body.month, request.body.day, request.body.hour, request.body.minute, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
+                if (err) {
+                    throw err;
+                } else {
+                    return response.redirect('/events');
+                }
+            });
+        }
+    } else {
+        console.log('This is a GET request');
+    }
+    return response.render('events/new', contextData);
 }
 
 
@@ -93,5 +122,5 @@ function rsvp(request, response) {
 
 
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, createPost,
+    singleEvent, eventsSQL, donate, rsvp, createPost, newEvent,
 };
