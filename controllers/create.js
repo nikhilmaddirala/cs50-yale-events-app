@@ -22,12 +22,16 @@ function createPost(request, response) {
         date: Date(request.body.datetime),
         image: request.body.image,
         location: request.body.location,
-        attending: [],
+        firstname: request.body.firstname,
+        lastname: request.body.lastname,
+        emailaddress: request.body.emailaddress,
+        description: request.body.description,
     };
     eventsJS.addEvent(event);
+    console.log(event);
     eventsJS.addEventSQL(request.body.eventname, request.body.datetime,
-        request.body.image, request.body.location);
-        console.log(event);
+        request.body.image, request.body.location, request.body.firstname,
+        request.body.lastname, request.body.emailaddress, request.body.description);
     response.redirect('/events');
 }
 

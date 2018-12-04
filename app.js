@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', indexControllers.index);
 app.get('/create', createControllers.createGet);
 app.get('/events', eventsControllers.eventsSQL);
-app.post('/createevent', createControllers.createPost);
+app.post('/createevent', eventsControllers.createPost);
 app.post('/events/:id/rsvp', eventsControllers.rsvp);
 app.post('/events/:id/donate', eventsControllers.donate);
 app.get('/about', aboutControllers.about);
@@ -46,5 +46,3 @@ app.get('/events/:id', eventsControllers.singleEvent);
 
 
 module.exports = app;
-
-

@@ -11,11 +11,11 @@ const client = new Client({
 
 
 // Add event to allEvents
-function addEventSQL(title, date, image, location) {
+function addEventSQL(title, date, image, location, firstname, lastname, emailaddress, description) {
     client.connect();
-    client.query('INSERT INTO events (title, date, image, location) values ($1, $2, $3, $4);', [title, date, image, location], (err) => {
+    client.query('INSERT INTO events (title, date, image, location, firstname, lastname, emailaddress, description) values ($1, $2, $3, $4, $5, $6, $7, $8);', [title, date, image, location, firstname, lastname, emailaddress, description], (err) => {
         if (err) throw err;
-        // console.log(res);
+        // console.log(res.rows);
         // client.end();
     });
 }
