@@ -25,12 +25,13 @@ function createPost(request, response) {
         firstname: request.body.firstname,
         lastname: request.body.lastname,
         emailaddress: request.body.emailaddress,
+        description: request.body.description,
     };
     eventsJS.addEvent(event);
     console.log(event);
     eventsJS.addEventSQL(request.body.eventname, request.body.datetime,
         request.body.image, request.body.location, request.body.firstname,
-        request.body.lastname, request.body.emailaddress);
+        request.body.lastname, request.body.emailaddress, request.body.description);
     response.redirect('/events');
 }
 
