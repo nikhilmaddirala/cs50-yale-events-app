@@ -9,6 +9,18 @@ const client = new Client({
     ssl: true,
 });
 
+// create event controller
+function createPost(request, response) {
+    client.connect();
+    client.query('INSERT INTO events (title, date, image, location, firstname, lastname, emailaddress, description) values ($1, $2, $3, $4, $5, $6, $7, $8);', [request.body.eventname, request.body.datetime, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
+        if (err) {
+            throw err;
+        } else {
+            response.redirect('/events');
+        }
+    });
+}
+
 
 // Events controller
 function eventsSQL(request, response) {
@@ -80,5 +92,5 @@ function rsvp(request, response) {
 
 
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp,
+    singleEvent, eventsSQL, donate, rsvp, createPost,
 };
