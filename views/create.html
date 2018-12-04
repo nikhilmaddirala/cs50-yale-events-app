@@ -8,7 +8,7 @@
 <!-- MultiStep Form -->
   <div class="row">
     <div class="col-md-9">
-        <form id="msform" action="/createevent" method="post">
+        <form id="msform" action="/createevent" onsubmit="return validateForm()" method="post">
             <!-- progressbar -->
             <ul id="progressbar">
                 <li class="active">Event Organizer Details</li>
@@ -43,6 +43,28 @@
             </fieldset>
         </form>
     </div>
+
+
+<script>
+    function validateForm() {
+    var x1 = document.forms["msform"]["firstname"].value;
+    var x2 = document.forms["msform"]["lastname"].value;
+    var x3 = document.forms["msform"]["emailaddress"].value;
+    var x4 = document.forms["msform"]["eventname"].value;
+    var x5 = document.forms["msform"]["image"].value;
+    var x6 = document.forms["msform"]["location"].value;
+    var x7 = document.forms["msform"]["datetime"].value;
+    var x8 = document.forms["msform"]["description"].value;
+    // if (x1 == "" || x2 == "" || x3 == "" || x4 == "" || x5 == "" || x6 == "" || x7 == "" || x8 == "" || ) {
+    //     alert("Please make sure all fields are filled!");
+    //     return false;
+    // }
+    if (x1 == "" || x2 == "" || x3 == "" || x4 == "" || x5 == "" || x6 == "" || x7 == "" || x8 == "") {
+        alert("Please make sure all fields are filled!");
+        return false;
+    }    
+}
+</script>
 
 {% endblock %}
 
