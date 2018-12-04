@@ -78,4 +78,13 @@ implement callback functions to ensure that the database query executed first,
 and then moved the redirect to the callback portion of the function. One 
 of our routes (singleEvent) even had multiple nested callbacks!
 
-
+#otherusefulresources
+We were very grateful to find a boostrap form template which we were able to
+use for creating our user input form. We obtained the source code for this form
+at the following URL:
+http://designify.me/web-design/bootstrap-multi-step-signup-form/#.XAbPN5NKjyg
+Moreover, we also used free, non-commerical use, no-attribution images on our
+homepage carousel slider which were obtained at the following links:
+https://www.pexels.com/photo/purple-fireworks-effect-1190298/
+https://www.pexels.com/photo/people-having-a-concert-1190297/
+https://www.pexels.com/photo/group-of-people-sitting-on-chair-in-dimmed-room-1481276/
