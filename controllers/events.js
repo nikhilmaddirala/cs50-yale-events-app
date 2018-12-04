@@ -12,7 +12,7 @@ const client = new Client({
 // create event controller
 function createPost(request, response) {
     client.connect();
-    client.query('INSERT INTO events (title, date, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, 0);', [request.body.eventname, request.body.datetime, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
+    client.query('INSERT INTO events (title, date, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, 0);', [request.body.title, request.body.datetime, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
         if (err) {
             throw err;
         } else {

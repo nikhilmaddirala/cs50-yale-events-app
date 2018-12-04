@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
-app.get('/create', createControllers.createGet);
+app.get('/events/new', createControllers.createGet);
 app.get('/events', eventsControllers.eventsSQL);
 app.post('/createevent', eventsControllers.createPost);
 app.post('/events/:id/rsvp', eventsControllers.rsvp);
