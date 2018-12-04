@@ -2,104 +2,70 @@
 
 {% block body %}
 
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 12px;
-}
-
-
-</style>
-
-<body>
-
 <div class="container">
-  <h2>List of Events</h2>
-   
-  <table class="table table-hover table-bordered">
-    <thead class="thead-light">
+    <br>
 
-  <tr>
-    <th>Event id</th>
-    <th>Event name</th>
-    <th>Location</th> 
-    <th>Image</th>
-    <th>Date</th>
-  </tr>
-   </thead>
-    <tbody>
-{% for event in eventsListSQL %}
-<tr>
-    <td>{{ event.id }}</td>
-    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
-    <td>{{ event.location }}</td>
-    <td>{{ event.image }}</td>
-    <td>{{ event.date }}</td>
-</tr>
-{% endfor %}
-   </tbody>
-</table>
+<div class="jumbotron">
+    <h2 class="h1-responsive">{{ event.title }}</h2>
+    <p class="lead">Placeholder for Event Description.</p>
+    <hr class="my-2">
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/events/{{ event.id }}/rsvp" method="post">
+        Enter your email address to RSVP:<br>
+        </form>
+        <br>
+        <input type="text" placeholder="E-mail address" name="email"><br>
+        <button class="btn btn-primary btn-lg" type="submit">RSVP</button>
+    </div>
+    
+    <div class="col-md-6">
+        <form action="/events/{{ event.id }}/donate" method="post">
+        <br>Help Support this event, make a contribution!<br>
+        <button class="btn btn-success btn-lg" type="submit">Donate</button>
+        </form>
+    </div>
 </div>
 
-</body>
-</html>
-
-
-<p>
-    Event id: {{ event.id }}.
-</p>
-<p>
-    Event name: {{ event.title }}.
-</p>
-<p>
-    Event image: {{ event.image }}.
-</p>
-<p>
-    Event location: {{ event.location }}.
-</p>
-<p>
-    Event attendees: 
-    {% for attendee in attendees %}
-    {{ attendee.email }}
-    {% endfor %}
-</p>
-
-<p>
-    Event created by: {{ event.lastname }}, {{ event.firstname}} ({{ event.emailaddress}})
-</p>
-<p>
-    Number of donations: {{ event.donations }}.
-</p>
-
-<form action="/events/{{ event.id }}/donate" method="post">
-    Make a donation:<br>
-    <input type="submit" value="Donate">
-</form>
-
+<br>
 <br>
 
-<form action="/events/{{ event.id }}/rsvp" method="post">
-    Enter your email address to RSVP:<br>
-    <input type="text" placeholder="email address" name="email"><br>
-    <input type="submit" value="RSVP">
-</form>
+<div class="card border-light mb-3" style="max-width: 20rem;">
+  <div class="card-header"><h5>Event Created by: </h5></div>
+  <div class="card-body">
+    <p class="card-text">{{ event.lastname }}, {{ event.firstname}} ({{ event.emailaddress}})</p>
+  </div>
+</div>
+
+<div class="card border-light mb-3" style="max-width: 20rem;">
+  <div class="card-header"><h5>Event Location</h5></div>
+  <div class="card-body">
+    <p class="card-text">{{ event.location }}</p>
+  </div>
+</div>
+
+<div class="card border-light mb-3" style="max-width: 20rem;">
+  <div class="card-header"><h5>Event Attendees</h5></div>
+  <div class="card-body">
+    <p class="card-text">{% for attendee in attendees %}
+    {{ attendee.email }}
+    {% endfor %}
+    </p>
+  </div>
+</div>
+
+<div class="card border-light mb-3" style="max-width: 20rem;">
+  <div class="card-header"><h5>Number of Donations</h5></div>
+  <div class="card-body">
+    <p class="card-text">{{ event.donations }}
+    </p>
+  </div>
+</div>
+<br>
+
+</div>
+</div>
 
 
 {% endblock %}
