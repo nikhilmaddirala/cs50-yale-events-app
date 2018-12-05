@@ -48,6 +48,24 @@ function newEvent(request, response) {
 }
 
 
+// Index controller
+function index(request, response) {
+    client.connect();
+    client.query('SELECT * FROM events ORDER BY id;', (err, res) => {
+        if (err) {
+            throw err;
+        } else {
+            const contextData = {
+                title: 'Eventbrite clone project starter',
+                salutation: 'Hello Yalies!',
+                eventsListSQL: res.rows,
+            };
+            response.render('events', contextData);
+        }
+    });
+}
+
+
 // Events controller
 function eventsSQL(request, response) {
     client.connect();
@@ -221,5 +239,5 @@ function rsvp(request, response) {
 
 
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent,
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, 
 };
