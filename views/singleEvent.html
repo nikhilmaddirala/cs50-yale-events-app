@@ -22,7 +22,10 @@
     <br>
 
 <div class="jumbotron">
-    <h2 class="h1-responsive">{{ event.title }}</h2>
+    <h1 id="title" class="h1-responsive">{{ event.title }}</h1>
+    <span id="date">
+      {{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}} {{event.minute}}
+    </span>
     <p class="lead">Event Description: {{ event.description }}</p>
     <hr class="my-2">
 
