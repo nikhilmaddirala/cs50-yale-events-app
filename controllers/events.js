@@ -32,8 +32,13 @@ function newEvent(request, response) {
         if (!request.body.title || request.body.title.length > 50) {
             errors.push('This is a bad title');
         }
-        // MORE ERROR TESTING
-
+        if (!request.body.image || request.body.image !== '*.png' || request.body.image !== '*.jpg' || request.body.image !== '*.gif') {
+            errors.push('This is a bad image');
+        }
+        if (!request.body.location || request.body.location.length > 50) {
+            errors.push('This is a bad location');
+        }
+        contextData.errors = errors;
         if (errors.length === 0) {
             client.connect();
             client.query('INSERT INTO events (title, year, month, day, hour, minute, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 0);', [request.body.title, request.body.year, request.body.month, request.body.day, request.body.hour, request.body.minute, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
@@ -47,6 +52,7 @@ function newEvent(request, response) {
     } else {
         console.log('This is a GET request');
     }
+    console.log(contextData.errors);
     return response.render('events/new', contextData);
 }
 
