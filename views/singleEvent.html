@@ -30,7 +30,7 @@
     <div class="col-md-6">
         <form action="/events/{{ event.id }}" method="post">
         Enter your email address to RSVP:<br>
-        <input type="text" placeholder="E-mail address" name="email"><br>
+        <input type="email" placeholder="E-mail address" name="email" id="email"><br>
         <button class="btn btn-primary btn-lg" type="submit">RSVP</button>
         </form>
     </div>
@@ -38,7 +38,7 @@
     <div class="col-md-6">
         <form action="/events/{{ event.id }}/donate" method="post">
         <br>Help Support this event, make a contribution!<br>
-        <button class="btn btn-success btn-lg" type="submit">Donate</button>
+        <button class="btn btn-success btn-lg" type="submit" id="donate">Donate</button>
         </form>
     </div>
 </div>
@@ -63,9 +63,13 @@
 <div class="card border-light mb-3" style="max-width: 20rem;">
   <div class="card-header"><h5>Event Attendees</h5></div>
   <div class="card-body">
-    <p class="card-text">{% for attendee in attendees %}
-    {{ attendee.email }}
+    <p class="card-text">
+    <ul class="list-group" id="attendees">
+    {% for attendee in attendees %}
+            <li class="list-group-item">{{ attendee.email }}</li>
     {% endfor %}
+    </ul>    
+    
     </p>
   </div>
 </div>
