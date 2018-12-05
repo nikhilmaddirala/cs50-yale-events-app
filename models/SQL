@@ -19,3 +19,7 @@ create table attendees (
     id          int,
     email       varchar
 );
+
+eventbrite-clone-tests-windows-v4.2 test golden-meadow "http://localhost:9515" "https://golden-meadow.herokuapp.com/"
+
+eventbrite-clone-tests-windows-v4.2 test golden-meadow "http://localhost:9515" "http://msd-nm587.c9users.io"

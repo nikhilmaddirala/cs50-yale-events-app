@@ -72,6 +72,7 @@ function singleEvent(request, response) {
         errors: [],
         event: [],
         attendees: [],
+        confirmation: [],
     };
     // query event and attendees
     client.connect();
@@ -88,13 +89,13 @@ function singleEvent(request, response) {
 
                     // post request for rsvp
                     if (request.method === 'POST') {
-                        console.log('This is a POST request');
+                        // console.log('This is a POST request');
                         const errors = [];
-                        if (request.body.email.slice(-9) !== '@yale.edu') {
+                        if (request.body.email.slice(-9).toLowerCase() !== '@yale.edu') {
                             errors.push('This is a bad email');
                         }
                         contextData.errors = errors;
-                
+                        console.log(contextData.errors);
                         // check for errors
                         if (errors.length === 0) {
                             client.connect();
@@ -102,6 +103,16 @@ function singleEvent(request, response) {
                                 if (err) {
                                     throw err;
                                 } else {
+                                    // return response.redirect(`/events/${request.params.id}`);
+                                    const crypto = require('crypto');
+                                    const email = request.body.email.toLowerCase();
+                                    const teamNickname = 'golden-meadow';
+                                    const cc = crypto.createHash('sha256')
+                                        .update(`${email}-${teamNickname}`)
+                                        .digest('hex')
+                                        .substring(0, 7);
+                                    contextData.confirmation = [request.body.email + ' is registered with code ' + cc];
+                                    console.log(contextData.attendees);
                                     return response.render('singleEvent', contextData);
                                 }
                             });
