@@ -2,6 +2,34 @@
 
 {% block body %}
 
+<body>
+
+<div class="container">
+  <h2>Upcoming Events</h2>
+   
+  <table class="table table-hover table-bordered">
+    <thead class="thead-light">
+      
+  <tr>
+    <th>Event name</th>
+    <th>Location</th> 
+    <th>Created By</th>
+    <th>Date</th>
+  </tr>
+   </thead>
+    <tbody>
+{% for event in eventsListSQL %}
+<tr>
+    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
+    <td>{{ event.location }}</td>
+    <td>{{ event.firstname }} {{ event.lastname }}</td>
+    <td>{{ event.date }}</td>
+</tr>
+{% endfor %}
+   </tbody>
+</table>
+</div>
+<br><br><br><br>
 <div>
     <div class="carousel">
         <ul class="slides">
