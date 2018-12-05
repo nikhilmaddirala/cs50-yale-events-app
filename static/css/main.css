@@ -314,3 +314,12 @@ img {
     overflow: hidden;
     border-radius: 0%;
 }
+
+.special-new {
+    max-width: 800px;
+    height: auto;
+    width: auto;
+    float:left;
+    overflow: hidden;
+    border-radius: 0%;
+}

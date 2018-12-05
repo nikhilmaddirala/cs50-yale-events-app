@@ -8,7 +8,7 @@ function createGet(request, response) {
         title: 'Eventbrite clone project starter',
         salutation: 'Hello Yalies!',
     };
-    response.render('create', contextData);
+    response.render('events/new', contextData);
 }
 
 function createPost(request, response) {

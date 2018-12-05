@@ -1,0 +1,21 @@
+create table events (
+    id          serial primary key,
+    title       varchar,
+    minute      int,
+    hour        int,
+    day         int,
+    month       varchar,
+    year        int,
+    image       varchar,
+    location    varchar,
+    firstname   varchar,
+    lastname    varchar,
+    emailaddress    varchar,
+    description varchar,
+    donations   int
+);
+
+create table attendees (
+    id          int,
+    email       varchar
+);

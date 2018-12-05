@@ -1,0 +1,188 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% if errors %}
+    <ul class='form-errors'>
+        {% for error in errors %}
+        <li>
+            {{ error }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container">
+  <h2>Create Event</h2>
+
+<!-- MultiStep Form -->
+  <div class="row">
+    <div class="col-md-9">
+        <form id="msform" action="/createevent" onsubmit="return validateForm()" method="post">
+            <!-- progressbar -->
+            <ul id="progressbar">
+                <li class="active">Event Organizer Details</li>
+                <li>Event Details</li>
+                <li>Confirm</li>
+            </ul>
+            <!-- fieldsets -->
+            <fieldset>
+                <h2 class="fs-title">Event Organizer Details</h2>
+                <h3 class="fs-subtitle">Tell us something more about you</h3>
+                <input type="text" name="firstname" placeholder="First Name"/>
+                <input type="text" name="lastname" placeholder="Last Name"/>
+                <input type="text" name="emailaddress" placeholder="E-mail Address"/>
+                <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">Event Details</h2>
+                <h3 class="fs-subtitle">Tell us a bit more about your event</h3>
+                <label for="title"></label>
+                <input type="text" name="title" placeholder="Event Title"/>
+                <label for="location"></label>
+                <input type="text" name="location" placeholder="Event Location"/>
+                <input type="text" name="description" placeholder="Event Description"/>
+                <label for="image"></label>
+                <input type="text" name="image" placeholder="Event Image URL" multiple>
+            <div class= "special-new">
+                <label for="year">Year</label>
+                <select name="year">
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                </select>
+            </div>
+                <br>
+            <div class= "special-new">
+                <label for="month">Month</label>
+                <select name="month">
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+            </div>
+                <br><br>
+            <div class= "special-new">
+                <label for="day">Day</label>
+                <select name="day">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                </select>
+            </div>
+                <br><br>
+            <div class= "special-new">
+                <label for="hour">Hour</label>
+                <select name="hour">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                </select>
+            </div>
+                <br><br>
+            <div class= "special-new">
+                <label for="minute">Minute</label>
+                <select name="minute">
+                    <option>00</option>
+                    <option>30</option>
+                    </select>
+            </div>
+                <br><br>
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset> 
+            <fieldset>
+                <h2 class="fs-title">Confirm Below </h2>
+                <h3 class="fs-subtitle">Confirm your submission by submitting below!</h3>
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                <input type="submit" class="submit action-button" value="Submit">
+            </fieldset>
+        </form>
+    </div>
+
+<script>
+    function validateForm() {
+    var x1 = document.forms["msform"]["firstname"].value;
+    var x2 = document.forms["msform"]["lastname"].value;
+    var x3 = document.forms["msform"]["emailaddress"].value;
+    var x4 = document.forms["msform"]["eventname"].value;
+    var x5 = document.forms["msform"]["image"].value;
+    var x6 = document.forms["msform"]["location"].value;
+    var x7 = document.forms["msform"]["datetime"].value;
+    var x8 = document.forms["msform"]["description"].value;
+    // if (x1 == "" || x2 == "" || x3 == "" || x4 == "" || x5 == "" || x6 == "" || x7 == "" || x8 == "" || ) {
+    //     alert("Please make sure all fields are filled!");
+    //     return false;
+    // }
+    if (x1 == "" || x2 == "" || x3 == "" || x4 == "" || x5 == "" || x6 == "" || x7 == "" || x8 == "") {
+        alert("Please make sure all fields are filled!");
+        return false;
+    }    
+}
+</script>
+
+{% endblock %}
+
+{% block late_loading_js %}
+{% endblock %}
