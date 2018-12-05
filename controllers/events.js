@@ -48,6 +48,24 @@ function newEvent(request, response) {
 }
 
 
+// Index controller
+function index(request, response) {
+    client.connect();
+    client.query('SELECT * FROM events ORDER BY id;', (err, res) => {
+        if (err) {
+            throw err;
+        } else {
+            const contextData = {
+                title: 'Eventbrite clone project starter',
+                salutation: 'Hello Yalies!',
+                eventsListSQL: res.rows,
+            };
+            response.render('events', contextData);
+        }
+    });
+}
+
+
 // Events controller
 function eventsSQL(request, response) {
     client.connect();
@@ -72,6 +90,8 @@ function singleEvent(request, response) {
         errors: [],
         event: [],
         attendees: [],
+        confirmation: [],
+        title: []
     };
     // query event and attendees
     client.connect();
@@ -85,16 +105,17 @@ function singleEvent(request, response) {
                 } else {
                     contextData.event = res.rows[0];
                     contextData.attendees = res2.rows;
+                    contextData.title = res.rows[0].title;
 
                     // post request for rsvp
                     if (request.method === 'POST') {
-                        console.log('This is a POST request');
+                        // console.log('This is a POST request');
                         const errors = [];
-                        if (request.body.email.slice(-9) !== '@yale.edu') {
+                        if (request.body.email.slice(-9).toLowerCase() !== '@yale.edu') {
                             errors.push('This is a bad email');
                         }
                         contextData.errors = errors;
-                
+                        console.log(contextData.errors);
                         // check for errors
                         if (errors.length === 0) {
                             client.connect();
@@ -102,6 +123,16 @@ function singleEvent(request, response) {
                                 if (err) {
                                     throw err;
                                 } else {
+                                    // return response.redirect(`/events/${request.params.id}`);
+                                    const crypto = require('crypto');
+                                    const email = request.body.email.toLowerCase();
+                                    const teamNickname = 'golden-meadow';
+                                    const cc = crypto.createHash('sha256')
+                                        .update(`${email}-${teamNickname}`)
+                                        .digest('hex')
+                                        .substring(0, 7);
+                                    contextData.confirmation = [request.body.email + ' is registered with code ' + cc];
+                                    console.log(contextData.attendees);
                                     return response.render('singleEvent', contextData);
                                 }
                             });
@@ -208,5 +239,5 @@ function rsvp(request, response) {
 
 
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent,
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, 
 };

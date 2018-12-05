@@ -35,7 +35,7 @@ app.use('/static', express.static('static'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Now, attach our "controllers" to our "routes".
-app.get('/', indexControllers.index);
+app.get('/', eventsControllers.index);
 app.get('/events/new', eventsControllers.newEvent);
 app.get('/events', eventsControllers.eventsSQL);
 app.post('/createevent', eventsControllers.newEvent);
