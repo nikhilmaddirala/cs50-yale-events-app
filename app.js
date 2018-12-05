@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 // locally instead of a dependency that was installed as
 // specified in our `package.json` file, like "express".
 const indexControllers = require('./controllers/index.js');
-const createControllers = require('./controllers/create.js');
+// const createControllers = require('./controllers/create.js');
 const eventsControllers = require('./controllers/events.js');
 const aboutControllers = require('./controllers/about.js');
 
@@ -36,13 +36,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Now, attach our "controllers" to our "routes".
 app.get('/', indexControllers.index);
-app.get('/events/new', createControllers.createGet);
+app.get('/events/new', eventsControllers.newEvent);
 app.get('/events', eventsControllers.eventsSQL);
-app.post('/createevent', eventsControllers.createPost);
+app.post('/createevent', eventsControllers.newEvent);
 app.post('/events/:id/rsvp', eventsControllers.rsvp);
+app.get('/events/:id/rsvp', eventsControllers.rsvp);
 app.post('/events/:id/donate', eventsControllers.donate);
 app.get('/about', aboutControllers.about);
 app.get('/events/:id', eventsControllers.singleEvent);
-
+app.post('/events/:id', eventsControllers.singleEvent);
 
 module.exports = app;
