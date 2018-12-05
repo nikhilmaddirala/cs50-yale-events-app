@@ -73,6 +73,7 @@ function singleEvent(request, response) {
         event: [],
         attendees: [],
         confirmation: [],
+        title: []
     };
     // query event and attendees
     client.connect();
@@ -86,6 +87,7 @@ function singleEvent(request, response) {
                 } else {
                     contextData.event = res.rows[0];
                     contextData.attendees = res2.rows;
+                    contextData.title = res.rows[0].title;
 
                     // post request for rsvp
                     if (request.method === 'POST') {
