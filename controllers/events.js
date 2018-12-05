@@ -60,7 +60,7 @@ function index(request, response) {
                 salutation: 'Hello Yalies!',
                 eventsListSQL: res.rows,
             };
-            response.render('events', contextData);
+            response.render('home', contextData);
         }
     });
 }
