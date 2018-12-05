@@ -12,8 +12,8 @@
       <li class="event" id="event-{{ event.id }}">
         <a href="/events/{{ event.id }}" id="title">{{ event.title }}</a>
         <br />
-        <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}} {{event.minute}}</time>
-        TEST event-{{event.id}} TEST
+        <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>
+        event-{{event.id}}
       </li>
       {% endfor %}
 </ul>
