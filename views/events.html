@@ -7,23 +7,32 @@
 <div class="container">
   <h2>Upcoming Events</h2>
    
- <ul>
-      {% for event in eventsListSQL %}
-      <li class="event" id="event-{{ event.id }}">
-        <a href="/events/{{ event.id }}" id="title">{{ event.title }}</a>
-        <br />
-        <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>
-        event-{{event.id}}
-      </li>
-      {% endfor %}
-</ul>
-
+  <table class="table table-hover table-bordered">
+    <thead class="thead-light">
+      
+  <tr>
+    <th>Event name</th>
+    <th>Location</th> 
+    <th>Created By</th>
+    <th>Date</th>
+  </tr>
+   </thead>
+    <tbody>
+{% for event in eventsListSQL %}
+<tr>
+    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
+    <td>{{ event.location }}</td>
+    <td>{{ event.firstname }} {{ event.lastname }}</td>
+    <td>{{ event.date }}</td>
+</tr>
+{% endfor %}
+   </tbody>
+</table>
 </div>
-
-</body>
+<br><br><br><br>
 
 {% endblock %}
 
 {% block late_loading_js %}
+<script src="/static/js/catgifs.js"></script>
 {% endblock %}
-

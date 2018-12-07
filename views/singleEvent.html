@@ -40,9 +40,9 @@
     
     <div class="col-md-6">
         <form action="/events/{{ event.id }}/donate" method="post">
-        <br>Help Support this event, make a contribution!<br>
+        <br>Want to contribute? <br>
+        <a id="donate" type="submit"></a>
         <button class="btn btn-success btn-lg" type="submit" id="donate">Donate</button>
-        </form>
     </div>
 </div>
 
@@ -57,9 +57,19 @@
 </div>
 
 <div class="card border-light mb-3" style="max-width: 20rem;">
-  <div class="card-header"><h5>Event Location</h5></div>
+  <div class="card-header">
+    <h5>Event Location</h5></div>
   <div class="card-body">
-    <p class="card-text">{{ event.location }}</p>
+    <p class="card-text"><span id="location">{{ event.location }}</span></p>
+  </div>
+</div>
+
+<div class="card border-light mb-3" style="max-width: 20rem;">
+  <div class="card-header">
+    <h5>Event Image</h5></div>
+  <div class="card-body">
+    <img id="image"></img>
+    <span id="image">{{ event.image }}</span></p>
   </div>
 </div>
 

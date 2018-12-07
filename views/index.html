@@ -7,95 +7,22 @@
 <div class="container">
   <h2>Upcoming Events</h2>
    
-  <table class="table table-hover table-bordered">
-    <thead class="thead-light">
-      
-  <tr>
-    <th>Event name</th>
-    <th>Location</th> 
-    <th>Created By</th>
-    <th>Date</th>
-  </tr>
-   </thead>
-    <tbody>
-{% for event in eventsListSQL %}
-<tr>
-    <td> <a href="/events/{{ event.id }}">{{ event.title }}</a> </td>
-    <td>{{ event.location }}</td>
-    <td>{{ event.firstname }} {{ event.lastname }}</td>
-    <td>{{ event.date }}</td>
-</tr>
-{% endfor %}
-   </tbody>
-</table>
+ <ul>
+      {% for event in eventsListSQL %}
+      <li class="event" id="event-{{ event.id }}">
+        <a href="/events/{{ event.id }}" id="title">{{ event.title }}</a>
+        <br />
+        <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>
+        event-{{event.id}}
+      </li>
+      {% endfor %}
+</ul>
+
 </div>
-<br><br><br><br>
-<div>
-    <div class="carousel">
-        <ul class="slides">
-            <input type="radio" name="radio-buttons" id="img-1" checked />
-            <li class="slide-container">
-                <div class="slide-image">
-                    <img src="/static/img/Audience1.jpg">
-                    <div class="carousel-caption d-none d-md-block">
-    <h5></h5>
-    <p style="font-size:50px;">Be in the know! Don't miss a Yale event again!</p>
-  </div>
-                </div>
-                <div class="carousel-controls">
-                    <label for="img-3" class="prev-slide">
-                        <span>&lsaquo;</span>
-                    </label>
-                    <label for="img-2" class="next-slide">
-                      <span>&rsaquo;</span>
-                    </label>
-                </div>
-            </li>
-            <input type="radio" name="radio-buttons" id="img-2" />
-            <li class="slide-container">
-                <div class="slide-image">
-                    <img src="/static/img/Audience2.jpg">
-                    <div class="carousel-caption d-none d-md-block">
-    <h6></h6>
-    <p style="font-size:50px;">Be in the know! Don't miss a Yale event again!</p>
-                </div>
-                <div class="carousel-controls">
-                    <label for="img-1" class="prev-slide">
-                        <span>&lsaquo;</span>
-                    </label>
-                    <label for="img-3" class="next-slide">
-                        <span>&rsaquo;</span>
-                    </label>
-                </div>
-            </li>
-            <input type="radio" name="radio-buttons" id="img-3" />
-            <li class="slide-container">
-                <div class="slide-image">
-                    <img src="/static/img/Audience3.jpg">
-                    <div class="carousel-caption d-none d-md-block">
-    <h7></h7>
-    <p style="font-size:50px;">Be in the know! Don't miss a Yale event again!</p>
-                </div>
-                <div class="carousel-controls">
-                    <label for="img-2" class="prev-slide">
-                        <span>&lsaquo;</span>
-                    </label>
-                    <label for="img-1" class="next-slide">
-                        <span>&rsaquo;</span>
-                    </label>
-                </div>
-            </li>
-            <div class="carousel-dots">
-                <label for="img-1" class="carousel-dot" id="img-dot-1"></label>
-                <label for="img-2" class="carousel-dot" id="img-dot-2"></label>
-                <label for="img-3" class="carousel-dot" id="img-dot-3"></label>
-            </div>
-        </ul>
-    </div>
-</div>
+
+</body>
 
 {% endblock %}
 
 {% block late_loading_js %}
-<script src="/static/js/catgifs.js"></script>
 {% endblock %}

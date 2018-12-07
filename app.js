@@ -45,5 +45,7 @@ app.post('/events/:id/donate', eventsControllers.donate);
 app.get('/about', aboutControllers.about);
 app.get('/events/:id', eventsControllers.singleEvent);
 app.post('/events/:id', eventsControllers.singleEvent);
+app.get('/api/events', eventsControllers.APIpull);
+app.get('/api/events/?search=:title', eventsControllers.APIpull);
 
 module.exports = app;

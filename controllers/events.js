@@ -9,6 +9,7 @@ const client = new Client({
     ssl: true,
 });
 
+const modelevents = require('../models/events.js');
 
 // new event controller
 function newEvent(request, response) {
@@ -60,11 +61,10 @@ function index(request, response) {
                 salutation: 'Hello Yalies!',
                 eventsListSQL: res.rows,
             };
-            response.render('home', contextData);
+            response.render('index', contextData);
         }
     });
 }
-
 
 // Events controller
 function eventsSQL(request, response) {
@@ -131,7 +131,7 @@ function singleEvent(request, response) {
                                         .update(`${email}-${teamNickname}`)
                                         .digest('hex')
                                         .substring(0, 7);
-                                    contextData.confirmation = [request.body.email + ' is registered with code ' + cc];
+                                    contextData.confirmation = ['REGISTERED ' + request.body.email + '! Your confirmation code is ' + cc];
                                     console.log(contextData.attendees);
                                     return response.render('singleEvent', contextData);
                                 }
@@ -238,6 +238,47 @@ function rsvp(request, response) {
 }
 
 
+
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent, index, 
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull
 };
+
+// Events controller
+function APIpull(request, response) {
+    let events = client.query('SELECT * FROM events');
+    for (let i = 0; i < events.length; i +=1) {
+    const events2 = {
+        id: events[i].id,
+        title: events[i].title,
+        //date: Date(request.body.datetime),
+    //     image: events[i].image,
+    //     location: request.body.location,
+    //     firstname: request.body.firstname,
+    //     lastname: request.body.lastname,
+    //     emailaddress: request.body.emailaddress,
+    //     description: request.body.description,
+    };
+            const contextData = {
+                events: events2
+            };
+            //test if there is a query or not
+            if (request.query.search) {
+                var querysearch = request.query.search.toLowerCase();
+                var matchingevents = [];
+                for (let i = 0; i < events.length; i +=1) {
+                    if(events[i].title.toLowerCase().includes(querysearch) == true) {
+                        matchingevents.push(events[i]);
+                    }
+                }
+                const contextData2 = {
+                    events: matchingevents
+                };
+                //if pass test, render subset of events that match
+                response.send(contextData2);
+                }
+                else {
+                    response.send(contextData);
+                    console.log(contextData);
+                }
+            }
+}
