@@ -237,6 +237,45 @@ function rsvp(request, response) {
     console.log(contextData.errors);
 }
 
+// API controller
+function APIpull(request, response) {
+    client.connect();
+    client.query('SELECT id, title, location, NULL as attendees, image, concat(month, day, year) as time FROM events ORDER BY id;', (err, res) => {
+        if (err) {
+            throw err;
+        } else {
+            client.query('SELECT email FROM attendees;', (err2, res2) => {
+                if (err2) {
+                    throw err;
+                } else {
+                    const contextData = {
+                        events: res.rows,
+                        // attendees: res2.rows,
+                    };
+                    if (request.query.search) {
+                        var querysearch = request.query.search.toLowerCase();
+                        var matchingevents = [];
+                        for (let i = 0; i < contextData.events.length; i +=1) {
+                            if(contextData.events[i].title.toLowerCase().includes(querysearch) == true) {
+                                matchingevents.push(contextData.events[i]);
+                            }
+                        }
+                        const contextData2 = {
+                            events: matchingevents
+                        };
+                        //if pass test, render subset of events that match
+                        response.send(contextData2);
+                        }
+                        else {
+                            response.send(contextData);
+                            console.log(contextData);
+                        }
+                }
+            });
+        }
+    });
+}
+
 
 
 module.exports = {
@@ -244,7 +283,7 @@ module.exports = {
 };
 
 // Events controller
-function APIpull(request, response) {
+function APIpullOLD(request, response) {
     let events = client.query('SELECT * FROM events');
     for (let i = 0; i < events.length; i +=1) {
     const events2 = {
