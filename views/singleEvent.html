@@ -41,12 +41,12 @@
     <!-- Button code -->
 <div title="Add to Calendar" class="addeventatc">
     Add to Calendar
-    <span class="start">12/21/2018 08:00 AM</span>
-    <span class="end">12/21/2018 10:00 AM</span>
+    <span class="start">{{event.month}}/{{event.day}}/{{event.year}}</span>
+    <span class="end">{{event.month}}/{{event.day}}/{{event.year}}</span>
     <span class="timezone">America/Los_Angeles</span>
-    <span class="title">Summary of the event</span>
-    <span class="description">Description of the event</span>
-    <span class="location">Location of the event</span>
+    <span class="title">{{event.title}}</span>
+    <span class="description">{{event.description}}</span>
+    <span class="location">{{event.location}}</span>
 </div>
     
     <div class="col-md-6">

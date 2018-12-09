@@ -43,7 +43,7 @@ function newEvent(request, response) {
         }
     } else {
         console.log('This is a GET request');
-        return response.render('events/new', contextData);
+        return response.render('new', contextData);
     }
     console.log(contextData.errors);
 }
@@ -279,7 +279,7 @@ function APIpull(request, response) {
 
 
 module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull,
 };
 
 // Events controller

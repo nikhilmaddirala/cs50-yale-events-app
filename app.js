@@ -17,6 +17,7 @@ const indexControllers = require('./controllers/index.js');
 // const createControllers = require('./controllers/create.js');
 const eventsControllers = require('./controllers/events.js');
 const aboutControllers = require('./controllers/about.js');
+const testControllers = require('./controllers/test.js');
 
 // Through this configuration, Nunjucks will "tell"
 // our Express app that it is handling the templates,
@@ -47,5 +48,6 @@ app.get('/events/:id', eventsControllers.singleEvent);
 app.post('/events/:id', eventsControllers.singleEvent);
 app.get('/api/events', eventsControllers.APIpull);
 app.get('/api/events/?search=:title', eventsControllers.APIpull);
+app.get('/test', testControllers.newtest);
 
 module.exports = app;
