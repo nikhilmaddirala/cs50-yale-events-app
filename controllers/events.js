@@ -39,7 +39,7 @@ function newEvent(request, response) {
                 }
             });
         } else {
-            return response.render('events/new', contextData);
+            return response.render('new', contextData);
         }
     } else {
         console.log('This is a GET request');

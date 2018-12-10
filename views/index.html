@@ -4,9 +4,15 @@
 
 <body>
 
+ <div class="speciallayer" text-align="center">
+    <div class="specialtitle">NEVER MISS ANOTHER YALE EVENT!<br>
+    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Browse Events</a>
+    </div>
+</div>
+
 <div class="container">
     <h2>Upcoming Events</h2>
-  
+
 <ul>
       {% for event in eventsListSQL %}
       <li class="event" id="event-{{ event.id }}">
@@ -32,4 +38,11 @@
 {% endblock %}
 
 {% block late_loading_js %}
+<script>
+$(".jumbotron").css({ height: $(window).height() + "px" });
+
+$(window).on("resize", function() {
+  $(".jumbotron").css({ height: $(window).height() + "px" });
+});
+</script>
 {% endblock %}

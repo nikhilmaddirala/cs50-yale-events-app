@@ -4,13 +4,13 @@
 
 {% if errors %}
     <ul class='form-errors'>
-        {% for error in errors %}
+    {% for error in errors %}
         <li>
             <font color="red">{{ error }}</font>
         </li>
-    </ul>
     {% endfor %}
-{% endif %}
+    </ul>
+    {% endif %}
 
 <div class="container">
   <h2>Create Event</h2>
@@ -270,6 +270,8 @@
         <br><br><br><br><br><br><br>
 
     </div>
+</div>
+
 <script>
     function validateForm() {
     var x1 = document.forms["msform"]["firstname"].value;

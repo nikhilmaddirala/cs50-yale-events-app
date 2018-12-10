@@ -12,25 +12,30 @@
     </ul>
 {% endif %}
 
-
-{% if confirmation %}
-{{ confirmation }}
-{% endif %}
-
+<div class="container">
+<div class="container-confirmation">
+    {% if confirmation %}
+    <i><b>{{ confirmation }}</b></i>
+    {% endif %}
+</div>
+</div>
 
 <div class="container">
     <br>
 
 <div class="jumbotron">
     <h1 id="title" class="h1-responsive">{{ event.title }}</h1>
-    <span id="date">
-      {{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}} {{event.minute}}
-    </span>
-    <p class="lead">Event Description: {{ event.description }}</p>
+    <p><span id="date">
+      <b>Date:</b> {{event.month}}/ {{event.day}}/ {{event.year}} 
+      </span></p>
+      <p><span id="time">
+      <b>Time:</b> {{event.hour}}:{{event.minute}}
+      </span></p>
+    <p class="lead"><b>Description:</b> {{ event.description }}</p>
     <hr class="my-2">
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <form action="/events/{{ event.id }}" method="post">
         Enter your email address to RSVP:<br>
         <input type="email" placeholder="E-mail address" name="email" id="email"><br>
@@ -38,36 +43,40 @@
         </form>
     </div>
     
-    <!-- Button code -->
-<div title="Add to Calendar" class="addeventatc">
-    Add to Calendar
-    <span class="start">{{event.month}}/{{event.day}}/{{event.year}}</span>
-    <span class="end">{{event.month}}/{{event.day}}/{{event.year}}</span>
-    <span class="timezone">America/Los_Angeles</span>
-    <span class="title">{{event.title}}</span>
-    <span class="description">{{event.description}}</span>
-    <span class="location">{{event.location}}</span>
-</div>
-    
-    <div class="col-md-6">
+    <div class="col-md-4">
         <form action="/events/{{ event.id }}/donate" method="post">
         <br>Want to contribute? <br>
         <a id="donate" type="submit"></a>
         <button class="btn btn-success btn-lg" type="submit" id="donate">Donate</button>
     </div>
+    
+    <!-- Button code -->
+    <div class="col-md-4">
+      <br><br>
+    <div title="Add to Calendar" class="addeventatc">
+    Add to Calendar
+      <span class="start">{{event.month}}/{{event.day}}/{{event.year}}</span>
+      <span class="end">{{event.month}}/{{event.day}}/{{event.year}}</span>
+      <span class="timezone">America/Los_Angeles</span>
+      <span class="title">{{event.title}}</span>
+      <span class="description">{{event.description}}</span>
+      <span class="location">{{event.location}}</span>
+</div>
+    
+</div>
 </div>
 
 <br>
 <br>
 
-<div class="card border-light mb-3" style="max-width: 20rem;">
+<div class="card border-light mb-3" style="max-width: 100rem;">
   <div class="card-header"><h5>Event Created by: </h5></div>
   <div class="card-body">
     <p class="card-text">{{ event.lastname }}, {{ event.firstname}} ({{ event.emailaddress}})</p>
   </div>
 </div>
 
-<div class="card border-light mb-3" style="max-width: 20rem;">
+<div class="card border-light mb-3" style="max-width: 100rem;">
   <div class="card-header">
     <h5>Event Location</h5></div>
   <div class="card-body">
@@ -75,7 +84,7 @@
   </div>
 </div>
 
-<div class="card border-light mb-3" style="max-width: 20rem;">
+<div class="card border-light mb-3" style="max-width: 100rem;">
   <div class="card-header">
     <h5>Event Image</h5></div>
   <div class="card-body">
@@ -84,21 +93,21 @@
   </div>
 </div>
 
-<div class="card border-light mb-3" style="max-width: 20rem;">
+<div class="card border-light mb-3" style="max-width: 100rem;">
   <div class="card-header"><h5>Event Attendees</h5></div>
-  <div class="card-body">
-    <p class="card-text">
-    <ul class="list-group" id="attendees">
-    {% for attendee in attendees %}
-            <li class="list-group-item">{{ attendee.email }}</li>
-    {% endfor %}
+        <ul class="list-group" id="attendees">
+        {% for attendee in attendees %}
+        <li class="list-group-item">
+          <div class="card-body">
+        {{ attendee.email }}
+        {% endfor %}
+        </div>
+        </li>
     </ul>    
     
-    </p>
   </div>
-</div>
 
-<div class="card border-light mb-3" style="max-width: 20rem;">
+<div class="card border-light mb-3" style="max-width: 100rem;">
   <div class="card-header"><h5>Number of Donations</h5></div>
   <div class="card-body">
     <p class="card-text">{{ event.donations }}
@@ -106,7 +115,6 @@
   </div>
 </div>
 <br>
-
 </div>
 </div>
 
