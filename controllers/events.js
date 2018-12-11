@@ -1,3 +1,4 @@
+
 // Create a function which is a "controller", it
 // handles a request, writing the response.
 
@@ -20,17 +21,11 @@ function newEvent(request, response) {
         console.log('This is a POST request');
         const errors = [];
         if (!request.body.title || request.body.title.length > 50) {
-            errors.push('Please enter a title shorter than 50 characters');
+            errors.push('This is a bad title');
         }
-        if (!request.body.image || request.body.image.slice(-4) !== '.png') {
-             errors.push('Please enter a valid image');
-        }
-        // if (!request.body.image || (request.body.image.slice(-4) !== '.jpg')) {
+        // if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
         //     errors.push('This is a bad image');
         // 
-        if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
-             errors.push('This is a bad image');
-         
         if (!request.body.location || request.body.location.length > 50) {
             errors.push('This is a bad location');
         }
@@ -53,6 +48,7 @@ function newEvent(request, response) {
     }
     console.log(contextData.errors);
 }
+
 
 // Index controller
 function index(request, response) {
@@ -282,11 +278,6 @@ function APIpull(request, response) {
 }
 
 
-
-module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull,
-};
-
 // Events controller
 function APIpullOLD(request, response) {
     let events = client.query('SELECT * FROM events');
@@ -323,4 +314,10 @@ function APIpullOLD(request, response) {
                 else {
                     response.send(contextData);
                     console.log(contextData);
-                };
+                }
+            }
+}
+
+module.exports = {
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull,
+};

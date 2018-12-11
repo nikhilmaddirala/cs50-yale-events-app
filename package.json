@@ -25,7 +25,8 @@
     "test": "jest --forceExit --detectOpenHandles",
     "start": "node server.js",
     "lint": "eslint .",
-    "dev": "nodemon -e js,json,html --exec \"npm run lint && npm start\""
+    "dev": "nodemon -e js,json,html --exec \"npm run lint && npm start\"",
+    "dev2": "nodemon server.js"
   },
   "author": "Kyle Jensen",
   "license": "UNLICENSE",
