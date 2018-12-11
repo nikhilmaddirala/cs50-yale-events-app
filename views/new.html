@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
 {% if errors %}
     <ul class='form-errors'>
     {% for error in errors %}
@@ -43,7 +42,7 @@
                 <input type="text" name="location" placeholder="Event Location"/>
                 <input type="text" name="description" placeholder="Event Description"/>
                 <label for="image"></label>
-                <input type="text" name="image" placeholder="Event Image URL" multiple>
+                <input type="text" name="image" placeholder="Event Image URL">
             <div class="col-md-6">
                 <h5> Event Start time </h5>
                 <label for="year"></label>
@@ -271,6 +270,7 @@
 
     </div>
 </div>
+</div>
 
 <script>
     function validateForm() {
@@ -292,8 +292,4 @@
     }    
 }
 </script>
-
-{% endblock %}
-
-{% block late_loading_js %}
 {% endblock %}
