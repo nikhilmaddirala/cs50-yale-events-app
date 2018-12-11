@@ -40,7 +40,6 @@
 </ul>
 
 <ul>
-      {% for event in eventsListSQL %}
     <li class="event" id="event-{{ event.id }}">
          <div class = "card">
            <div class="card-header">
@@ -62,7 +61,6 @@
 </ul>
 
 <ul>
-      {% for event in eventsListSQL %}
       <li class="event" id="event-{{ event.id }}">
 <div class="card-group">
   <div class="card">
@@ -93,8 +91,6 @@
 </ul>
 
 </div>
-
-{% endfor %}
 
   <!--    <h5 class="card-title">Card title</h5>-->
   <!--    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
