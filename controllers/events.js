@@ -22,9 +22,15 @@ function newEvent(request, response) {
         if (!request.body.title || request.body.title.length > 50) {
             errors.push('Please enter a title shorter than 50 characters');
         }
+<<<<<<< HEAD
         if (!request.body.image || request.body.image.slice(-4) !== '.png') {
              errors.push('Please enter a valid image');
         }
+=======
+        // if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
+        //     errors.push('This is a bad image');
+        // 
+>>>>>>> parent of f71400c... Event page images
         if (!request.body.location || request.body.location.length > 50) {
             errors.push('This is a bad location');
         }
