@@ -13,11 +13,6 @@ create table events (
     emailaddress    varchar,
     description varchar,
     donations   int
-    endminute      int,
-    endhour        int,
-    endday         int,
-    endmonth       varchar,
-    endyear        int,
 );
 
 create table attendees (
