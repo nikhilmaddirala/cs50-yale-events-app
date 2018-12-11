@@ -22,9 +22,9 @@ function newEvent(request, response) {
         if (!request.body.title || request.body.title.length > 50) {
             errors.push('This is a bad title');
         }
-        // if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
-        //     errors.push('This is a bad image');
-        // 
+        if (!request.body.image || (request.body.image.slice(-4) !== '.jpg')) {
+             errors.push('This is a bad image');
+        }
         if (!request.body.location || request.body.location.length > 50) {
             errors.push('This is a bad location');
         }
