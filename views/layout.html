@@ -3,13 +3,21 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <!-- Page hiding snippet (recommended)  -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-XXXXXX':true});</script>
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'UA-129889665-1', 'require', {'optimize_id': 'GTM-KMSHZDR'});
+    gtag('config', 'UA-129889665-1', 'require', { 'optimize_id': 'GTM-KMSHZDR' });
     </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -19,7 +27,6 @@
     })(window,document,'script','dataLayer','GTM-MSZ4PGB');</script>
     <!-- End Google Tag Manager -->
     <!-- Required meta tags -->
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="/../../favicon.ico">
     <!-- Primary Stylesheet for Additional Cusotmizations -->
