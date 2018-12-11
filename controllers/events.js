@@ -20,10 +20,10 @@ function newEvent(request, response) {
         console.log('This is a POST request');
         const errors = [];
         if (!request.body.title || request.body.title.length > 50) {
-            errors.push('This is a bad title');
+            errors.push('Please enter a title shorter than 50 characters');
         }
-        if (!request.body.image || (request.body.image.slice(-4) !== '.jpg')) {
-             errors.push('This is a bad image');
+        if (!request.body.image || request.body.image.slice(-4) !== '.png') {
+             errors.push('Please enter a valid image');
         }
         if (!request.body.location || request.body.location.length > 50) {
             errors.push('This is a bad location');
@@ -47,7 +47,6 @@ function newEvent(request, response) {
     }
     console.log(contextData.errors);
 }
-
 
 // Index controller
 function index(request, response) {
