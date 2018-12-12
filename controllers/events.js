@@ -1,4 +1,3 @@
-
 // Create a function which is a "controller", it
 // handles a request, writing the response.
 
@@ -23,9 +22,9 @@ function newEvent(request, response) {
         if (!request.body.title || request.body.title.length > 50) {
             errors.push('This is a bad title');
         }
-        // if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
-        //     errors.push('This is a bad image');
-        // 
+        if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
+            errors.push('This is a bad image');
+        }
         if (!request.body.location || request.body.location.length > 50) {
             errors.push('This is a bad location');
         }
@@ -40,11 +39,11 @@ function newEvent(request, response) {
                 }
             });
         } else {
-            return response.render('new', contextData);
+            return response.render('events/new', contextData);
         }
     } else {
         console.log('This is a GET request');
-        return response.render('new', contextData);
+        return response.render('events/new', contextData);
     }
     console.log(contextData.errors);
 }
@@ -238,48 +237,12 @@ function rsvp(request, response) {
     console.log(contextData.errors);
 }
 
-// API controller
-function APIpull(request, response) {
-    client.connect();
-    client.query('SELECT id, title, location, NULL as attendees, image, concat(month, day, year) as time FROM events ORDER BY id;', (err, res) => {
-        if (err) {
-            throw err;
-        } else {
-            client.query('SELECT email FROM attendees;', (err2, res2) => {
-                if (err2) {
-                    throw err;
-                } else {
-                    const contextData = {
-                        events: res.rows,
-                        // attendees: res2.rows,
-                    };
-                    if (request.query.search) {
-                        var querysearch = request.query.search.toLowerCase();
-                        var matchingevents = [];
-                        for (let i = 0; i < contextData.events.length; i +=1) {
-                            if(contextData.events[i].title.toLowerCase().includes(querysearch) == true) {
-                                matchingevents.push(contextData.events[i]);
-                            }
-                        }
-                        const contextData2 = {
-                            events: matchingevents
-                        };
-                        //if pass test, render subset of events that match
-                        response.send(contextData2);
-                        }
-                        else {
-                            response.send(contextData);
-                            console.log(contextData);
-                        }
-                }
-            });
-        }
-    });
-}
-
+module.exports = {
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull
+};
 
 // Events controller
-function APIpullOLD(request, response) {
+function APIpull(request, response) {
     let events = client.query('SELECT * FROM events');
     for (let i = 0; i < events.length; i +=1) {
     const events2 = {
@@ -317,7 +280,3 @@ function APIpullOLD(request, response) {
                 }
             }
 }
-
-module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull,
-};
