@@ -33,7 +33,8 @@ function newEvent(request, response) {
             client.connect();
             client.query('INSERT INTO events (title, year, month, day, hour, minute, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 0);', [request.body.title, request.body.year, request.body.month, request.body.day, request.body.hour, request.body.minute, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
                 if (err) {
-                    throw err;
+                    //throw err;
+                    return response.redirect('/events');
                 } else {
                     return response.redirect('/events');
                 }

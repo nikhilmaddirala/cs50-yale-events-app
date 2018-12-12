@@ -2,27 +2,136 @@
 
 {% block body %}
 
-<body>
-
-<div class="container">
-  <h2>Upcoming Events</h2>
-   
- <ul>
-      {% for event in eventsListSQL %}
-      <li class="event" id="event-{{ event.id }}">
-        <a href="/events/{{ event.id }}" id="title">{{ event.title }}</a>
-        <br />
-        <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>
-        event-{{event.id}}
-      </li>
-      {% endfor %}
-</ul>
-
+ <div class="speciallayer" text-align="center">
+    <div class="specialtitle">NEVER MISS ANOTHER YALE EVENT!<br>
+    <a href="/static/img/yale_image.jpg" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Browse Events</a>
+    </div>
 </div>
 
+<div class="container">
+    <h2>Upcoming Events</h2>
+    
+<ul>
+      {% for event in eventsListSQL %}
+      <li class="event" id="event-{{ event.id }}">
+        <div class="list-group">
+          <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#{{ event.id }}">{{ event.title }}</a>
+        </div>
+        <div id="{{ event.id }}" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+            Event description: {{ event.description }}<br>
+            Event time: <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>
+            <br>
+            <a href="/events/{{ event.id }}" id="title">Learn more here</a>
+            </div>
+        </div>
+        </div>
+        </li>
+      {% endfor %}
+</ul>
+</div> 
 </body>
+
+<br><br><br>
 
 {% endblock %}
 
+<!--<ul>-->
+<!--      {% for event in eventsListSQL %}-->
+<!--      <li class="event" id="event-{{ event.id }}">-->
+<!--        <div class="card-group">-->
+<!--            <div class="list-group">-->
+<!--              <div class="card-header">-->
+<!--              <a class="card-link" data-toggle="collapse" href="#{{ event.id }}">{{ event.title }}</a>-->
+<!--            </div>-->
+<!--            </div>-->
+<!--            <div class="list-group">-->
+<!--              <div class="card-header">-->
+<!--              <a class="card-link" data-toggle="collapse" href="#{{ event.id }}">{{ event.title }}</a>-->
+<!--            </div> -->
+<!--            </div>-->
+<!--            </div>-->
+
+<!--        <div id="{{ event.id }}" class="collapse" data-parent="#accordion">-->
+<!--            <div class="card-body">-->
+<!--            Event description: {{ event.description }}<br>-->
+<!--            Event time: <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>-->
+<!--            <br>-->
+<!--            <a href="/events/{{ event.id }}" id="title">Learn more here</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </li>-->
+<!--      {% endfor %}-->
+<!--</ul>-->
+
+<!--<ul>-->
+<!--    <li class="event" id="event-{{ event.id }}">-->
+<!--         <div class = "card">-->
+<!--           <div class="card-header">-->
+<!--            <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--            <div class="card-body">-->
+<!--            <a class="card-link" data-toggle="collapse" href="#{{ event.id }}">{{ event.title }}</a>-->
+<!--        </div>-->
+<!--        <div id="{{ event.id }}" class="collapse" data-parent="#accordion">-->
+<!--            <div class="card-body">-->
+<!--            Event description: {{ event.description }}<br>-->
+<!--            Event time: <time>{{event.month}}/ {{event.day}}/ {{event.year}} {{event.hour}}:{{event.minute}}</time>-->
+<!--            <br>-->
+<!--            <a href="/events/{{ event.id }}" id="title">Learn more here</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<!--<ul>-->
+<!--      <li class="event" id="event-{{ event.id }}">-->
+<!--<div class="card-group">-->
+<!--  <div class="card">-->
+<!--    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Card title</h5>-->
+<!--      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="card">-->
+<!--    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Card title</h5>-->
+<!--      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>-->
+<!--      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="card">-->
+<!--    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Card title</h5>-->
+<!--      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+<!--      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</ul>-->
+
+<!--</div>-->
+
+  <!--    <h5 class="card-title">Card title</h5>-->
+  <!--    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+  <!--    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+  <!--  </div>-->
+  <!--</div>-->
+
+<!--</div>-->
+
 {% block late_loading_js %}
+<script>
+$(".jumbotron").css({ height: $(window).height() + "px" });
+
+$(window).on("resize", function() {
+  $(".jumbotron").css({ height: $(window).height() + "px" });
+});
+</script>
 {% endblock %}
