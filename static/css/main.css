@@ -13,28 +13,28 @@
   background-repeat: no-repeat;
  }
 
-ul.slides {
-    display: block;
-    position: relative;
-    height: 600px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    list-style: none;
-}
+/*ul.slides {*/
+/*    display: block;*/
+/*    position: relative;*/
+/*    height: 600px;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    overflow: hidden;*/
+/*    list-style: none;*/
+/*}*/
 
-.slides * {
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-}
+/*.slides * {*/
+/*    user-select: none;*/
+/*    -ms-user-select: none;*/
+/*    -moz-user-select: none;*/
+/*    -khtml-user-select: none;*/
+/*    -webkit-user-select: none;*/
+/*    -webkit-touch-callout: none;*/
+/*}*/
 
-ul.slides input {
-    display: none; 
-}
+/*ul.slides input {*/
+/*    display: none; */
+/*}*/
 
 .slide-container { 
     display: block; 
@@ -327,10 +327,6 @@ img {
     color: #ff0000;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .container-confirmation {
     min-width: 992px !important;
   }
@@ -424,4 +420,23 @@ footer a {
     left: 0;
     overflow: hidden;
     height: 75px;
+}
+
+.form-errors {
+  padding-right: 15px;  
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  color: red;
+  font-size: 20px;
+}
+
+.clean-pass {
+  list-style-type: none;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  color: green;
+  font-size: 20px;
 }

@@ -2,19 +2,16 @@
 
 {% block body %}
 
-{% if errors %}
-    <ul class='form-errors'>
-        {% for error in errors %}
-        <li>
-            {{ error }}
-        </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+<div>
+    <ul class="form-errors" id ="form-errors">
+    {% for error in errors %}
+      <li class="form-errors" name="form-errors" id="form-errors">{{ error }}</li>
+    {% endfor %}
+</div>
 
 
 {% if confirmation %}
-{{ confirmation }}
+  {{ confirmation }}
 {% endif %}
 
 
@@ -34,7 +31,7 @@
         <form action="/events/{{ event.id }}" method="post">
         Enter your email address to RSVP:<br>
         <input type="email" placeholder="E-mail address" name="email" id="email"><br>
-        <button class="btn btn-primary btn-lg" type="submit">RSVP</button>
+        <button class="btn btn-primary btn-lg" type="submit" name="submit">RSVP</button>
         </form>
     </div>
     

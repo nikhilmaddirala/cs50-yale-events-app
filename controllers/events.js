@@ -11,6 +11,16 @@ const client = new Client({
 
 const modelevents = require('../models/events.js');
 
+// Check e-mail address validity
+// Our code for the validate email test was obtained from: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+function validateEmail(mailaddress) {
+  if (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(mailaddress))
+  {
+    return (true);
+    }
+    return (false);
+}
+
 // new event controller
 function newEvent(request, response) {
     const contextData = {
@@ -33,8 +43,7 @@ function newEvent(request, response) {
             client.connect();
             client.query('INSERT INTO events (title, year, month, day, hour, minute, image, location, firstname, lastname, emailaddress, description, donations) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 0);', [request.body.title, request.body.year, request.body.month, request.body.day, request.body.hour, request.body.minute, request.body.image, request.body.location, request.body.firstname, request.body.lastname, request.body.emailaddress, request.body.description], (err) => {
                 if (err) {
-                    //throw err;
-                    return response.redirect('/events');
+                    throw err;
                 } else {
                     return response.redirect('/events');
                 }
@@ -112,9 +121,9 @@ function singleEvent(request, response) {
                     if (request.method === 'POST') {
                         // console.log('This is a POST request');
                         const errors = [];
-                        if (request.body.email.slice(-9).toLowerCase() !== '@yale.edu') {
-                            errors.push('This is a bad email');
-                        }
+                        // if (request.body.email.slice(-9).toLowerCase() !== '@yale.edu') {
+                        //     errors.push('This is a bad email');
+                        // }
                         contextData.errors = errors;
                         console.log(contextData.errors);
                         // check for errors
@@ -154,33 +163,6 @@ function singleEvent(request, response) {
     });
 }
 
-
-
-// Single event page controller
-// function singleEvent(request, response) {
-//     client.connect();
-//     client.query('SELECT * FROM events WHERE id = $1 ORDER BY id;', [request.params.id], (err, res) => {
-//         if (err) {
-//             throw err;
-//         } else {
-//             client.query('SELECT email FROM attendees WHERE id = $1;', [request.params.id], (err2, res2) => {
-//                 if (err2) {
-//                     throw err;
-//                 } else {
-//                     const contextData = {
-//                         title: 'Eventbrite clone project starter',
-//                         salutation: 'Hello Yalies!',
-//                         event: res.rows[0],
-//                         attendees: res2.rows,
-//                     };
-//                     response.render('singleEvent', contextData);
-//                 }
-//             });
-//         }
-//     });
-// }
-
-
 // donate controller
 function donate(request, response) {
     client.connect();
@@ -195,18 +177,6 @@ function donate(request, response) {
 }
 
 
-// rsvp controller
-// function rsvp(request, response) {
-//     client.connect();
-//     client.query('INSERT INTO attendees (id, email) values ($1, $2);', [request.params.id, request.body.email], (err) => {
-//         if (err) {
-//             throw err;
-//         } else {
-//             response.redirect(`/events/${request.params.id}`);
-//         }
-//     });
-// }
-
 // new rsvp controller
 function rsvp(request, response) {
     const contextData = {
@@ -218,6 +188,9 @@ function rsvp(request, response) {
         if (request.body.email.slice(-9) !== '@yale.edu') {
             errors.push('This is a bad email');
         }
+        if (validateEmail(request.body.email.toLowerCase()) == false) {
+            errors.push('This is an innvalid e-mail');
+        }    
         contextData.errors = errors;
         if (errors.length === 0) {
             client.connect();
@@ -237,10 +210,6 @@ function rsvp(request, response) {
     }
     console.log(contextData.errors);
 }
-
-module.exports = {
-    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull
-};
 
 // Events controller
 function APIpull(request, response) {
@@ -281,3 +250,44 @@ function APIpull(request, response) {
                 }
             }
 }
+
+module.exports = {
+    singleEvent, eventsSQL, donate, rsvp, newEvent, index, APIpull,
+};
+
+
+// rsvp controller
+// function rsvp(request, response) {
+//     client.connect();
+//     client.query('INSERT INTO attendees (id, email) values ($1, $2);', [request.params.id, request.body.email], (err) => {
+//         if (err) {
+//             throw err;
+//         } else {
+//             response.redirect(`/events/${request.params.id}`);
+//         }
+//     });
+// }
+
+// Single event page controller
+// function singleEvent(request, response) {
+//     client.connect();
+//     client.query('SELECT * FROM events WHERE id = $1 ORDER BY id;', [request.params.id], (err, res) => {
+//         if (err) {
+//             throw err;
+//         } else {
+//             client.query('SELECT email FROM attendees WHERE id = $1;', [request.params.id], (err2, res2) => {
+//                 if (err2) {
+//                     throw err;
+//                 } else {
+//                     const contextData = {
+//                         title: 'Eventbrite clone project starter',
+//                         salutation: 'Hello Yalies!',
+//                         event: res.rows[0],
+//                         attendees: res2.rows,
+//                     };
+//                     response.render('singleEvent', contextData);
+//                 }
+//             });
+//         }
+//     });
+// }
