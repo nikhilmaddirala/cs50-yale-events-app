@@ -21,6 +21,50 @@ function validateEmail(mailaddress) {
     return (false);
 }
 
+// Defining maxID variable
+function maxID(request, response) {
+    client.connect();
+    // define context data
+    const contextData = {
+        errors: [],
+        event: [],
+        attendees: [],
+        confirmation: [],
+        title: []
+    };
+    client.query('SELECT id FROM events WHERE id=(SELECT max(id) FROM events);', (err, res3) => {
+        if (err) {
+            throw err;
+        } else {
+        // query event and attendees
+        client.connect();
+        var querying = "SELECT * FROM events WHERE id = ' "+ res3.rows[0].id+"'";
+        client.query(querying, (err, res) => {
+            if (err) {
+                    //throw err;
+                    console.log(res3);
+                    console.log(res3.rows[0].id);
+                } else {
+                    var querying2 = "SELECT * FROM attendees WHERE id = ' "+ res3.rows[0].id+"'";
+                    client.query(querying2, (err2, res2) => {
+                        if (err2) {
+                            throw err;
+                        } else {
+                            contextData.event = res.rows[0];
+                            contextData.attendees = res2.rows;
+                            contextData.title = res.rows[0].title;
+                        }
+                });
+                        console.log(contextData);
+                        response.render('singleEvent', contextData);
+            }
+            });
+        }
+
+        });
+
+}
+
 // new event controller
 function newEvent(request, response) {
     const contextData = {
@@ -32,7 +76,7 @@ function newEvent(request, response) {
         if (!request.body.title || request.body.title.length > 50) {
             errors.push('This is a bad title');
         }
-        if (!request.body.image || (request.body.image.slice(-4) !== '.png')) {
+        if (!request.body.image || ((request.body.image.slice(-4)) !== '.png') && ((request.body.image.slice(-4)) !== '.jpg') && ((request.body.image.slice(-4)) !== '.gif')) {
             errors.push('This is a bad image');
         }
         if (!request.body.location || request.body.location.length > 50) {
@@ -45,7 +89,8 @@ function newEvent(request, response) {
                 if (err) {
                     throw err;
                 } else {
-                    return response.redirect('/events');
+                    maxID();
+                    //return response.redirect('/events');
                 }
             });
         } else {
