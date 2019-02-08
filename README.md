@@ -1,13 +1,16 @@
 README.md
 
 #inro
-Welcome to our “event manager” app. This app is intended to be a rudimentary 
-clone of Eventbrite. You can use this app to create events, to view existing 
+Welcome to our “event manager” app. We created this app as part of our project for
+CS50 at Yale. Check out he app here: https://golden-meadow.herokuapp.com/
+
+This app is intended to be a rudimentary clone of Eventbrite / Facebook events. 
+You can use this app to create events, to view existing 
 events, to RSVP for existing events, and donate for events.
 
 #setup
 You can launch the app in one of two ways. The simplest way is to use this 
-heroku link (https://tranquil-mountain-74357.herokuapp.com/). Alternatively, 
+heroku link (https://golden-meadow.herokuapp.com/). Alternatively, 
 you can run the command “npm start” from the root directory.
 
 #app description
