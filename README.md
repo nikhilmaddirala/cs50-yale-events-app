@@ -1,6 +1,6 @@
 README.md
 
-#inro
+#intro
 Welcome to our “event manager” app. We created this app as part of our project for
 CS50 at Yale. Check out he app here: https://golden-meadow.herokuapp.com/
 
